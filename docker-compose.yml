@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "4000:4000"
+    volumes:
+      - todo-data:/app/data
+    environment:
+      - PORT=4000
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "9090:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  todo-data:
